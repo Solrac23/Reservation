@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { data } from "../restApi.json";
-import { Link } from "react-scroll";
+import './styles.css'
+import { data } from "../../restApi.json";
+import { Link as Scroll} from "react-scroll";
+import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FiLogIn } from "react-icons/fi"
 const Navbar = () => {
@@ -12,7 +14,7 @@ const Navbar = () => {
 					<div className={show ? "navLinks showmenu" : "navLinks"}>
 						<div className="links">
 								{data[0].navbarLinks.map((element) => (
-										<Link
+										<Scroll
 											to={element.link}
 											spy={true}
 											smooth={true}
@@ -20,14 +22,14 @@ const Navbar = () => {
 											key={element.id}
 										>
 											{element.title}
-										</Link>
+										</Scroll>
 								))}
 						</div>
 						<button className="menuBtn">NOSSO MENU</button>
 					</div>
 					<div className="login-container">
 							<div className="login">
-								<Link to={"/login"}>
+								<Link to={"/login"} href="/login">
 									<FiLogIn size={16} color="#000"/>
 									Login
 									</Link>

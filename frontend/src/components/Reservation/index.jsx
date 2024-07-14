@@ -1,4 +1,5 @@
 import React from "react"; // Importa o módulo React
+import './styles.css'
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"; // Importa o ícone de seta da biblioteca React Icons
 import axios from "axios"; // Importa o módulo Axios para fazer requisições HTTP
 import { useState } from "react"; // Importa o hook useState do React para gerenciar o estado dos componentes

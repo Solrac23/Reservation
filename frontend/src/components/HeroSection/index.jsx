@@ -1,5 +1,6 @@
 import React from "react";
-import Navbar from "./Navbar";
+import './styles.css'
+import Navbar from "../Navbar";
 
 const HeroSection = () => {
     return (

@@ -1,5 +1,6 @@
 import React from 'react'
-import { data } from '../restApi.json'
+import './styles.css'
+import { data } from '../../restApi.json'
 const Menu = () => {
     return (
         <>
