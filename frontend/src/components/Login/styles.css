@@ -1,0 +1,157 @@
+.login_main {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  padding: 30px 20px;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  z-index: 1;
+}
+
+.hidden {
+  display: none;
+}
+
+.login_main .container {
+  max-width: 1500px;
+  min-width: 1500px;
+  display: flex;
+  justify-content: center;
+}
+
+.login_main .container form {
+  width: 400px;
+  background: #fff;
+  height: 100%;
+  padding: 20px;
+  box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
+  -webkit-box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
+  -moz-box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
+}
+
+.login_main .container form div {
+  display: flex;
+  gap: 25px;
+  margin: 20px;
+}
+
+.login_main .container form div input {
+  flex: 1;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-bottom: 1px solid #333;
+  background: transparent;
+}
+
+.login_main .container form div input[type="email"],
+.login_main .container form div input[type="password"] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-bottom: 1px solid #555;
+  background: transparent;
+}
+
+
+.login_main .container form div input::placeholder {
+  color: #555;
+}
+
+.login_main .container form button { 
+  border: 1px solid black;
+  padding: 8px 36px;
+  border-radius: 30px;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 13px;
+  color: #111;
+  background: transparent;
+  margin-top: 30px;
+}
+
+.login_main .container form button:hover {
+  background: #111;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.login_main .container form .forgot-password a {
+  color: #111;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.login_main .container form .forgot-password a:hover {
+  color: #555;
+  transition: 0.4s;
+  cursor: pointer;
+ }
+
+@media (max-width: 1520px) {
+  .reservation .container {
+    min-width: 100%;
+  }
+}
+
+@media (max-width: 1040px) {
+  .reservation .container .banner {
+    padding: 20px;
+  }
+}
+
+@media (max-width: 1350px) {
+  .reservation .container .banner img {
+    width: 42vw;
+  }
+}
+
+@media (max-width: 885px) {
+  .reservation .container {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .reservation .container .banner img {
+    width: 70vw;
+  }
+
+  .reservation .container .banner {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 660px) {
+  .reservation .container .banner img {
+    width: 100%;
+  }
+}
+
+@media (max-width: 450px) {
+  .reservation .container .banner .reservation_form_box {
+    width: 100%;
+  }
+
+  .reservation .container .banner .reservation_form_box h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 325px) {
+  .reservation .container .banner .reservation_form_box h1 {
+    font-size: 1.6rem;
+  }
+}
