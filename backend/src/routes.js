@@ -17,6 +17,7 @@ router.post("/user/create", userController.createUser);
 
 router.post("/auth/login", authController.authenticate);
 // Definindo uma rota POST "/send" , que chama a função sendreservation quando a rota é acessada
+router.get("/reservations", authMiddleware, reservationController.getAllReservation)
 router.get("/reservation/:reservationId", authMiddleware, reservationController.getReservationByID)
 router.post("/send", authMiddleware, reservationController.sendReservation);
 
