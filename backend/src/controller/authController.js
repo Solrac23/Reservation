@@ -29,7 +29,9 @@ export default {
       secure: process.env.NODE_ENV === 'production',  // true for production
     }); // 1 day
 
-     return res.json({ success: true, token });
+      delete user.password
+
+      return res.json({ success: true, token, user });
     } catch (error) {
 
       console.log(`Error thrown: ${error}`);
