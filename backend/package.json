@@ -7,6 +7,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "npx knex migrate:latest && npx knex seed:run && nodemon ./src/server.js",
+    "migrate:rollback": "npx knex migrate:rollback --all",
     "test": "cross-env NODE_ENV=test"
   },
   "author": "",
