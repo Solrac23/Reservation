@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken"
-import Cookies from "js-cookie";
 import connection from "../database/connection.js";
 import { decrypt } from "./utils/cryptography.js"
 import ErrorHandler from "../error/error.js";
@@ -20,14 +19,7 @@ export default {
        return next(new ErrorHandler("Email ou senha inválidos", 401));
      }
  
-     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
-     
-     Cookies.set("authtoken", token, { 
-      expires: new Date(Date.now() + 86400000),
-      path: "/",
-      sameSite: "Strict",
-      secure: process.env.NODE_ENV === 'production',  // true for production
-    }); // 1 day
+      const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
 
       delete user.password
 
