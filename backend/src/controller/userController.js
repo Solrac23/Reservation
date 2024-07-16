@@ -1,6 +1,5 @@
 import connection from "../database/connection.js";
 import { crypt } from "./utils/cryptography.js";
-import Cookies from "js-cookie";
 import ErrorHandler from "../error/error.js";
 
 export default {
@@ -72,17 +71,17 @@ export default {
 
   try {
       // Tentando criar uma nova reserva no banco de dados utilizando o modelo Reservation
-     const users = await connection('users').insert({
-          first_name, 
-          last_name, 
-          email, 
-          role: newRole,
-          password: pass  // A senha é criptografada antes de ser salva no banco de dados
+      await connection('users').insert({
+        first_name, 
+        last_name, 
+        email, 
+        role: newRole,
+        password: pass  // A senha é criptografada antes de ser salva no banco de dados
       });
       // Se a criação for bem-sucedida, envia uma resposta de sucesso ao cliente
       return res.status(201).json({
-          success: true,
-          message: "Reserva enviada com sucesso!",
+        success: true,
+        message: "Reserva enviada com sucesso!",
       });
   } catch (error) {
       // Se ocorrer algum erro durante o processo de criação da reserva
