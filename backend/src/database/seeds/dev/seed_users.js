@@ -44,6 +44,7 @@ export async function seed(knex) {
       date: "2024-08-01",
       time: "10:00:00",
       phone: "12345678901",
+      people: 2,
     },
     {
       id: 2,
@@ -51,6 +52,7 @@ export async function seed(knex) {
       date: "2024-08-02",
       time: "11:00:00",
       phone: "98765432101",
+      people: 3,
     },
     {
       id: 3,
@@ -58,6 +60,7 @@ export async function seed(knex) {
       date: "2024-08-03",
       time: "12:00:00",
       phone: "09876543211",
+      people: 4,
     }
   ]);
 };
