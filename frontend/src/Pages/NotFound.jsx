@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HiOutlineArrowNarrowRight } from "react-icons/hi";
+import { HiOutlineArrowNarrowLeft } from "react-icons/hi";
 
 const NotFound = () => {
     return (
@@ -13,7 +13,7 @@ const NotFound = () => {
                     <Link to={"/"}>
                         Voltar a página inicial{" "}
                         <span>
-                            <HiOutlineArrowNarrowRight />
+                            <HiOutlineArrowNarrowLeft />
                         </span>
                     </Link>
                 </div>
