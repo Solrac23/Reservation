@@ -8,6 +8,10 @@ export default {
       
       const users = await connection("users").select("*");
 
+      users.map(user => {
+        delete user.password;
+      })
+
       return res.status(200).json({
         success: true,
         users
