@@ -83,10 +83,29 @@ nav svg {
 nav .login-container {
   width: 10vw;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
   padding-left: 16px;
 }
+
+nav .login-container .login{
+  padding-right: 10px;
+}
+
+nav .login-container .login a {
+  width: 100px;
+  font-size: 20px;
+  font-weight: 300;
+  color: #222;
+  text-decoration: none;
+}
+
+nav .login-container .login a:hover {
+  color: #555;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
 
 @media (max-width: 1520px) {
   nav {
