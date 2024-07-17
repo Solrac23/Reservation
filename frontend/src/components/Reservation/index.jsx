@@ -1,33 +1,41 @@
-import React from "react"; // Importa o módulo React
+import React,{ useState, useEffect } from "react"; // Importa o módulo React
 import './styles.css'
 import { HiOutlineArrowNarrowRight } from "react-icons/hi"; // Importa o ícone de seta da biblioteca React Icons
-import axios from "axios"; // Importa o módulo Axios para fazer requisições HTTP
-import { useState } from "react"; // Importa o hook useState do React para gerenciar o estado dos componentes
+import api from "../../services/api"// Importa o módulo Axios para fazer requisições HTTP
 import toast from "react-hot-toast"; // Importa o módulo React Hot Toast para exibir notificações
 import { useNavigate } from "react-router-dom"; // Importa o hook useNavigate do React Router para navegação programática
 
 // Componente de Reserva
 const Reservation = () => {
     // Define os estados dos campos do formulário de reserva
-    const [firstName, setFirstName] = useState(""); // Estado para o primeiro nome
-    const [lastName, setLastName] = useState(""); // Estado para o sobrenome
-    const [email, setEmail] = useState(""); // Estado para o email
     const [date, setDate] = useState(""); // Estado para a data da reserva
     const [time, setTime] = useState(""); // Estado para o horário da reserva
     const [phone, setPhone] = useState(0); // Estado para o número de telefone
+    const [people, setPeople] = useState(0); // Estado para o número de pessoas
     const navigate = useNavigate(); // Função para navegação programática
 
+    useEffect(() => {
+        // Verifica se o token está presente no localStorage
+        const token = localStorage.getItem("token");
+        if (!token) {
+            // Se não houver token, redireciona para a página de login
+            navigate("/");
+        }
+        
+    }, [navigate])
     // Função para lidar com o envio da reserva
     const handleReservation = async (e) => {
         e.preventDefault(); // Previne o comportamento padrão do formulário
         try {
+            const token = localStorage.getItem("token");
             // Faz uma requisição POST para o endpoint de reserva
-            const { data } = await axios.post(
-                "http://localhost:4000/api/v1/reservation/send", // URL do endpoint de reserva
-                { firstName, lastName, email, phone, date, time }, // Dados da reserva a serem enviados
+            const { data } = await api.post(
+                "send", // URL do endpoint de reserva
+                { phone, date, time, people }, // Dados da reserva a serem enviados
                 {
                     headers: {
                         "Content-Type": "application/json", // Define o tipo de conteúdo como JSON
+                        Authorization: `Bearer ${token}`
                     },
                     withCredentials: true, // Define se deve enviar cookies junto com a requisição (não útil neste caso)
                 }
@@ -35,12 +43,10 @@ const Reservation = () => {
             // Exibe uma mensagem de sucesso utilizando o React Hot Toast
             toast.success(data.message);
             // Limpa os campos do formulário após o envio da reserva
-            setFirstName("");
-            setLastName("");
             setPhone(0);
-            setEmail("");
             setTime("");
             setDate("");
+            setPeople(0);
             // Navega para a página de sucesso após o envio da reserva
             navigate("/success");
         } catch (error) {
@@ -62,25 +68,6 @@ const Reservation = () => {
                         <p>Para mais perguntas, ligue</p> {/* Informação adicional */}
                         <form>
                             <div>
-                                {/* Inputs para o primeiro nome e sobrenome */}
-                                <input
-                                    type="text"
-                                    placeholder="Informe Seu nome"
-                                    value={firstName}
-                                    onChange={(e) =>
-                                        setFirstName(e.target.value)
-                                    } // Atualiza o estado do primeiro nome conforme o usuário digita
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Informe seu Sobrenome"
-                                    value={lastName}
-                                    onChange={(e) =>
-                                        setLastName(e.target.value)
-                                    } // Atualiza o estado do sobrenome conforme o usuário digita
-                                />
-                            </div>
-                            <div>
                                 {/* Inputs para a data e horário da reserva */}
                                 <input
                                     type="date"
@@ -98,17 +85,16 @@ const Reservation = () => {
                             <div>
                                 {/* Inputs para o email e número de telefone */}
                                 <input
-                                    type="email"
-                                    placeholder="Email"
-                                    className="email_tag"
-                                    value={email}
-                                    onChange={(e) => setEmail(e.target.value)}
-                                />
-                                <input
                                     type="number"
                                     placeholder="Informe seu número"
                                     value={phone}
                                     onChange={(e) => setPhone(e.target.value)}
+                                />
+                                 <input
+                                    type="number"
+                                    placeholder="Informe o núemro de pessoas"
+                                    value={people}
+                                    onChange={(e) => setPeople(e.target.value)}
                                 />
                             </div>
                             {/* Botão para realizar a reserva */}

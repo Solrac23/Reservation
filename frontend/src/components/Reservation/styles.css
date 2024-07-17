@@ -47,17 +47,6 @@
   background: transparent;
 }
 
-.reservation .container .banner .reservation_form_box form input[type="email"] {
-  width: 100%;
-  margin-bottom: 20px;
-  padding: 5px;
-  font-size: 16px;
-  font-weight: 300;
-  border: none;
-  border-bottom: 1px solid #555;
-  background: transparent;
-}
-
 .reservation .container .banner .reservation_form_box form input[type="number"] {
   width: 100%;
   margin-bottom: 20px;
@@ -70,8 +59,7 @@
 }
 
 .reservation .container .banner .reservation_form_box form div input:focus,
-.reservation .container .banner .reservation_form_box form input[type="number"]:focus,
-.reservation .container .banner .reservation_form_box form input[type="email"]:focus {
+.reservation .container .banner .reservation_form_box form input[type="number"]:focus{
   outline: none;
   border-bottom: 2px solid skyblue;
 }
