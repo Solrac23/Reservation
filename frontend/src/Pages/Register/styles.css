@@ -1,0 +1,114 @@
+.register {
+  display: flex;
+  height: 100vh;
+  padding: 30px 20px;
+  justify-content: center;
+  align-items: center;
+  background: url(/reserve.svg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: right;
+}
+
+.register .container {
+  max-width: 1500px;
+  min-width: 1500px;
+  display: flex;
+  justify-content: center;
+}
+
+.register .container .register_form_box form { 
+  width: 400px;
+  background-color: #fff;
+  height: 100%;
+  padding: 20px;
+}
+
+.register .container .register_form_box form div {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.register .container .register_form_box form div input {
+  flex: 1;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-bottom: 1px solid #333;
+  background: transparent;
+}
+
+.register .container .register_form_box form input[type="email"] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-bottom: 1px solid #555;
+  background: transparent;
+}
+
+.register .container .register_form_box form input[type="password"] {
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 5px;
+  font-size: 16px;
+  font-weight: 300;
+  border: none;
+  border-bottom: 1px solid #333;
+  background: transparent;
+}
+
+.register .container .register_form_box form div input::placeholder {
+  color: #222;
+}
+
+.register .container .register_form_box h1 {
+  font-weight: 200;
+  font-size: 2.75rem;
+  color: #111;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.register .container .register_form_box form button {
+  border: 1px solid black;
+  padding: 8px 36px;
+  border-radius: 30px;
+  display: flex;
+  width: fit-content;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  font-size: 13px;
+  color: #111;
+  background: transparent;
+  margin-top: 10px;
+}
+
+.register .container .register_form_box form button:hover {
+  background: #111;
+  color: #fff;
+  transition: 0.4s;
+  cursor: pointer;
+}
+
+.register .container .register_form_box form .have-account a {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #111;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+.register .container .register_form_box form .have-account a:hover {
+  color: #555;
+  transition: 0.4s;
+  cursor: pointer;
+}
