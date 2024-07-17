@@ -81,7 +81,7 @@ export default {
       // Se a criação for bem-sucedida, envia uma resposta de sucesso ao cliente
       return res.status(201).json({
         success: true,
-        message: "Reserva enviada com sucesso!",
+        message: "Cadastro realizado com sucesso!",
       });
   } catch (error) {
       // Se ocorrer algum erro durante o processo de criação da reserva
