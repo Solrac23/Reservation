@@ -15,6 +15,7 @@
 }
 
 .login_main .container {
+  height: auto;
   max-width: 1500px;
   min-width: 1500px;
   display: flex;
@@ -29,6 +30,7 @@
   box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
   -webkit-box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
   -moz-box-shadow: -1px 0px 37px 0px rgba(152, 87, 191, 0.75);
+  border-radius: 6px;
 }
 
 .login_main .container form div {
@@ -87,6 +89,10 @@
   cursor: pointer;
 }
 
+.login_main .container form .forgot-password {
+  padding-top: -2px;
+}
+
 .login_main .container form .forgot-password a {
   color: #111;
   text-decoration: none;
@@ -94,6 +100,22 @@
 }
 
 .login_main .container form .forgot-password a:hover {
+  color: #555;
+  transition: 0.4s;
+  cursor: pointer;
+ }
+
+ .login_main .container form .sign-up a {
+  width: 50vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #111;
+  text-decoration: none;
+  font-size: 16px;
+ }
+
+ .login_main .container form .sign-up a:hover {
   color: #555;
   transition: 0.4s;
   cursor: pointer;
