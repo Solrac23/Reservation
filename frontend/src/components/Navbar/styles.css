@@ -29,7 +29,7 @@ nav .logo {
 }
 
 nav .navLinks {
-  flex: 2;
+  flex: 3;
 }
 
 nav .navLinks {
@@ -58,6 +58,9 @@ nav .navLinks .links a:hover {
 }
 
 nav .menuBtn {
+  display: flex;
+  justify-content: space-between;
+  margin-left: 10px;
   padding: 8px 20px;
   color: black;
   background: transparent;
@@ -80,32 +83,28 @@ nav .hamburger {
 nav svg {
   font-size: 1.75rem;
 }
-nav .login-container {
+nav {
   width: 10vw;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   align-items: center;
   padding-left: 16px;
 }
 
-nav .login-container .login{
-  padding-right: 10px;
-}
-
-nav .login-container .login a {
-  width: 100px;
+nav .userProfile a {
+  width: 100%;
+  padding: 0 10px 0 10px;
   font-size: 20px;
   font-weight: 300;
   color: #222;
   text-decoration: none;
 }
 
-nav .login-container .login a:hover {
+nav .userProfile a:hover {
   color: #555;
   transition: 0.3s;
   cursor: pointer;
 }
-
 
 @media (max-width: 1520px) {
   nav {

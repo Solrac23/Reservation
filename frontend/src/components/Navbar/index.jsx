@@ -1,21 +1,28 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Link} from "react-router-dom"
 import './styles.css'
 import api from "../../services/api";
 import { data } from "../../restApi.json";
 import toast from "react-hot-toast";
 import { Link as Scroll} from "react-scroll";
-import { GiHamburgerMenu } from "react-icons/gi";
+import { FiPower } from "react-icons/fi";
+
 const Navbar = () => {
 	const [user, setUser] = useState("")
+	const [role, setRole] = useState("")
 	const [show, setShow] = useState(false);
 	const navigate = useNavigate();
 	useEffect(() => {
 		const token = localStorage.getItem("token");
-    if (token) {
+		const role = localStorage.getItem("role");
+
+    if (token && role) {
       setShow(true);
+			setRole(role);
     } else {
       setShow(false);
+			setUser("");
+			setRole("");
 			navigate("/");
     }
 	}, [navigate])
@@ -24,26 +31,37 @@ const Navbar = () => {
 		async function handleUserLogin(){
 			const token = localStorage.getItem("token");
 
-			try {
-        const response = await api.get("user", {
-          headers: { Authorization: `Bearer ${token}` },
-        });
-				const user = response.data.user
-				setUser(user);
-        console.log("Usuário logado:", user.first_name);
-      } catch (error) {
-        console.error("Falha ao verificar o token", error);
-				localStorage.removeItem('token');
-				localStorage.removeItem('role');
-        toast.error("Sessão expirada. Faça login novamente");
-				setShow(false);
-        return;
-      }
+			if(!token){
+				return
+			}else{
+				try {
+					const response = await api.get("user", {
+						headers: { Authorization: `Bearer ${token}` },
+					});
+					const user = response.data.user
+					setUser(user);
+					console.log("Usuário logado:", user.first_name);
+				} catch (error) {
+					console.error("Falha ao verificar o token", error);
+					localStorage.removeItem('token');
+					localStorage.removeItem('role');
+					toast.error("Sessão expirada. Faça login novamente");
+					setShow(false);
+					return;
+				}
+			}
 		}
 
 		handleUserLogin();
 
 	}, [])
+
+	function handleLogout() {
+		localStorage.clear();
+ 
+    navigate("/");
+	}
+
 	return (
 			<>
 				<nav>
@@ -73,10 +91,14 @@ const Navbar = () => {
 							</Scroll>
 						</div>
 					</div>
-					<div className="hamburger" onClick={() => setShow(!show)}>
-								casas
-							<GiHamburgerMenu />
-					</div>
+					{user && role === "admin" && (
+            <div className="userProfile">
+							<Link to={"/users"}>Usuários cadastrados!</Link>
+						</div>
+					)}
+					<button className="menuBtn" onClick={handleLogout} type="button">
+						<FiPower size={18} color="#111" />
+					</button>
 				</nav>
 			</>
 	);
