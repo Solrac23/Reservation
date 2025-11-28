@@ -1,0 +1,22 @@
+services:
+  db:
+    image: mysql:9.5.0
+    restart: always
+    networks:
+      - restaurant_net
+    ports:
+      - 3308:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: 4638554885
+      MYSQL_USER: admin
+      MYSQL_PASSWORD: MistakeXi4
+      MYSQL_DATABASE: restaurant
+    volumes:
+      - restaurant_data:/var/lib/mysql
+
+volumes:
+  restaurant_data:
+
+networks:
+  restaurant_net:
+    driver: bridge
