@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "start": "node server.js",
-    "dev": "npx knex migrate:latest && npx knex seed:run && nodemon ./src/server.js",
-    "migrate:rollback": "npx knex migrate:rollback --all",
-    "test": "cross-env NODE_ENV=test"
+    "dev": "cross-env NODE_ENV=development knex migrate:latest && knex seed:run && nodemon ./src/server.js",
+    "migrate:make": "knex migrate:make ",
+    "migrate:rollback": "knex migrate:rollback --all",
+    "test": "cross-env NODE_ENV=test knex migrate:latest"
   },
   "author": "",
   "license": "ISC",
@@ -20,10 +21,16 @@
     "jsonwebtoken": "^9.0.2",
     "knex": "^3.1.0",
     "mysql2": "^3.10.2",
+    "sqlite3": "^5.1.7",
     "uuid": "^10.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.39.1",
+    "@stylistic/eslint-plugin": "^5.6.1",
+    "@types/bcryptjs": "^2.4.6",
     "cross-env": "^7.0.3",
+    "eslint": "^9.39.1",
+    "globals": "^16.5.0",
     "nodemon": "^3.1.4"
   }
 }
