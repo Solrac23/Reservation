@@ -9,16 +9,16 @@ export async function up(knex) {
 		return knex.schema.createTable("reservation", function(table) {
 			table.increments("id");
 			table.primary("id");
-			table.string("phone", 255)
+			table.text("phone", 255)
 				.notNullable()
 				.checkLength("=", 11);
 			table.date("date").notNullable();
 			table.time("time").notNullable();
 			table.integer("people", 255).notNullable();
-			table.uuid("user_id").defaultTo(knex.fn.uuid()).notNullable();
-			table.foreign("user_id").references("users.id").onUpdate("CASCADE").onDelete("RESTRICT");
-			table.timestamp("created_at", {precision: 6}).defaultTo(knex.fn.now(6));
-			table.timestamp("updated_at").defaultTo(knex.fn.now());
+			table.integer("user_id").notNullable();
+			table.foreign("user_id").references("user.id").onUpdate("CASCADE").onDelete("RESTRICT");
+			table.text("created_at").defaultTo(knex.fn.now());
+			table.text("updated_at").defaultTo(knex.fn.now());
 		});
 	}
 }
