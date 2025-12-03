@@ -48,12 +48,27 @@ export async function createUserService({
 
 export async function findAllUserService() {
 	try {
-		
-		const users = await db.select("first_name, last_name, email, password, role").from("users");
+		const users = await db.select("first_name", "last_name", "email", "role").from("users");
 
-		console.log(users);
-
+		return users;
 	} catch (err) {
 		throw new ErrorHandler("Erro ao listar usuários", 500);
+	}
+}
+
+export async function findUserByIdService(userId) {
+	try {
+		const user = await db.where("id", userId)
+			.from("users")
+			.select(["id", "first_name", "last_name", "email", "role", "created_at", "updated_at"])
+			.first();
+
+		if (!user) {
+			throw new ErrorHandler("Usuário não encontrado", 404);
+		}
+
+		return user;
+	} catch (err) {
+		throw new ErrorHandler("Erro ao buscar usuário", 500);
 	}
 }
