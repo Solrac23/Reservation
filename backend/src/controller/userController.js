@@ -1,48 +1,44 @@
-import connection from "../database/connection.js";
-import { crypt } from "./utils/cryptography.js";
 import ErrorHandler from "../error/error.js";
+import { createUserService, findAllUserService, findUserByIdService } from "../services/userService.js";
 
 export default {
-	async getAllUsers(req, res, next) {
+	async findAll(req, res, next) {
 		try {
       
-			const users = await connection("users").select("*");
-
-			users.map(user => {
-				delete user.password;
-			});
+			const users = await findAllUserService();
 
 			return res.status(200).json({
 				success: true,
-				users
+				users,
 			});
-		} catch (error) {
-			return next(new ErrorHandler("Erro ao listar usuários", 500));
+		} catch (err) {
+			console.log(err.message);
+			return next(err);
 		}
 	},
 
-	async getUserById(req, res, next) {
+	async findUserById(req, res, next) {
 		const { userId } = req;
 
-		try {
-			const user = await connection("users")
-				.where("id", userId)
-				.select("*")
-				.first();
+		if(!userId) {
+			throw new ErrorHandler("User id not exist", 404);
+		}
 
-			if (!user) {
-				return next(new ErrorHandler("Usuário não encontrado", 404));
-			}
+		try {
+
+			const user = await findUserByIdService(userId);
 
 			return res.status(200).json({
 				success: true,
 				user
 			});
-		} catch (error) {
-			return next(new ErrorHandler("Erro ao buscar usuário", 500));
+		} catch (err) {
+			console.log(err.message);
+			return next(err);
 		}
 	},
-	async createUser(req, res, next) {
+
+	async create(req, res, next) {
 		const { 
 			first_name, 
 			last_name, 
@@ -51,38 +47,15 @@ export default {
 			password
 		} = req.body;
 
-		let newRole;
-		// Verificando se todos os campos obrigatórios estão preenchidos
-		if (!first_name || !last_name || !email || !password) {
-			// Se algum campo estiver em branco, retorna um erro utilizando o ErrorHandler
-			return next(new ErrorHandler("Por favor, preencha o formulário de reserva completo!!", 400));
-		}
-
-		if(!role) {
-			newRole = "user";
-		}
-
-		const pass = crypt(password);
-
-		const userAlreadyExists = await connection("users")
-			.where("email", email)
-			.select("*")
-			.first();
-  
-		if(userAlreadyExists){
-			return next(new ErrorHandler("User already exists", 409));
-		}
-
 		try {
-			// Tentando criar uma nova reserva no banco de dados utilizando o modelo Reservation
-			await connection("users").insert({
-				first_name, 
-				last_name, 
-				email, 
-				role: newRole,
-				password: pass  // A senha é criptografada antes de ser salva no banco de dados
+			await createUserService({
+				first_name,
+				last_name,
+				email,
+				role,
+				password
 			});
-			// Se a criação for bem-sucedida, envia uma resposta de sucesso ao cliente
+
 			return res.status(201).json({
 				success: true,
 				message: "Cadastro realizado com sucesso!",
@@ -99,7 +72,6 @@ export default {
 				return next(new ErrorHandler(validationErrors.join(", "), 400));
 			}
 
-			// Se não for um erro de validação, repassa o erro para o próximo middleware de tratamento de erros
 			return next(error);
 		}
 	},
