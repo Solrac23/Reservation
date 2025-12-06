@@ -62,7 +62,7 @@ export default {
 		const { userId } = req;
 
 		if(!userId){
-			return next(new ErrorHandler("Usuário não fornecido", 400));
+			return next(new ErrorHandler("Usuário não fornecido", 401));
 		}
 		// Verificando se todos os campos obrigatórios estão preenchidos
 		if (!date || !time || !phone || !people) {
