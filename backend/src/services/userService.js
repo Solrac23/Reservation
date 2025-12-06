@@ -10,12 +10,6 @@ export async function createUserService({
 	role
 }) {
 
-	// Verificando se todos os campos obrigatórios estão preenchidos
-	if (!first_name || !last_name || !email || !password) {
-		// Se algum campo estiver em branco, retorna um erro utilizando o ErrorHandler
-		throw new ErrorHandler("Por favor, preencha o formulário de reserva completo!!", 400);
-	}
-
 	if(!role) {
 		role = "user";
 	}
@@ -42,7 +36,7 @@ export async function createUserService({
 		});
 	} catch (err) {
 		// Se ocorrer algum erro durante o processo de criação da reserva
-		throw new ErrorHandler("Erro ao criar usuário", 400);
+		throw new ErrorHandler("Erro ao criar usuário", 500);
 	}
 }
 
@@ -62,10 +56,6 @@ export async function findUserByIdService(userId) {
 			.from("users")
 			.select(["id", "first_name", "last_name", "email", "role", "created_at", "updated_at"])
 			.first();
-
-		if (!user) {
-			throw new ErrorHandler("Usuário não encontrado", 404);
-		}
 
 		return user;
 	} catch (err) {
