@@ -21,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true, limit: "2026kb" }));
 app.set("trust proxy", 1);
 app.disable("x-powered-by");
-app.use("/api/v1/reservation", router);
+app.use("/api/v1", router);
 app.use(errorMiddleware);
 
 export default app;
