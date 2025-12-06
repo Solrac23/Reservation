@@ -10,14 +10,14 @@ import authController from "./controller/authController.js";
 // Criando uma nova rota utilizando o método Router do Express
 const router = Router();
 
-router.get("/user/list", authMiddleware, roleMiddleware, userController.getAllUsers);
-router.get("/user", authMiddleware, userController.getUserById);
-router.post("/user/create", userController.createUser);
+router.get("/user/list", authMiddleware, roleMiddleware, userController.findAllUsers);
+router.get("/user", authMiddleware, userController.findUserById);
+router.post("/user", userController.create);
 
 router.post("/auth/login", authController.authenticate);
 // Definindo uma rota POST "/send" , que chama a função sendreservation quando a rota é acessada
-router.get("/reservations", authMiddleware, reservationController.getAllReservation);
-router.get("/reservation/:reservationId", authMiddleware, reservationController.getReservationByID);
-router.post("/send", authMiddleware, reservationController.sendReservation);
+router.get("/reservation", authMiddleware, reservationController.findAllReservation);
+router.get("/reservation/:reservationId", authMiddleware, reservationController.findReservationById);
+router.post("/reservation", authMiddleware, reservationController.create);
 
 export default router;

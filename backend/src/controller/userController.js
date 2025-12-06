@@ -2,7 +2,7 @@ import ErrorHandler from "../error/error.js";
 import { createUserService, findAllUserService, findUserByIdService } from "../services/userService.js";
 
 export default {
-	async findAll(req, res, next) {
+	async findAllUsers(req, res, next) {
 		try {
       
 			const users = await findAllUserService();
