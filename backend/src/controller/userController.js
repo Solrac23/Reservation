@@ -28,6 +28,10 @@ export default {
 
 			const user = await findUserByIdService(userId);
 
+			if (!user) {
+				throw new ErrorHandler("Usuário não encontrado", 404);
+			}
+
 			return res.status(200).json({
 				success: true,
 				user
@@ -46,6 +50,12 @@ export default {
 			role, 
 			password
 		} = req.body;
+
+		// Verificando se todos os campos obrigatórios estão preenchidos
+		if (!first_name || !last_name || !email || !password) {
+		// Se algum campo estiver em branco, retorna um erro utilizando o ErrorHandler
+			throw new ErrorHandler("Por favor, preencha o formulário de reserva completo!!", 400);
+		}
 
 		try {
 			await createUserService({
