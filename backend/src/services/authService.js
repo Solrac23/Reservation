@@ -1,9 +1,15 @@
+import jwt from "jsonwebtoken";
+import { decrypt } from "../controller/utils/cryptography.js";
 import db from "../database/db.js";
 import ErrorHandler from "../error/error.js";
 
-export async function authenticateService(email) {
+export async function authenticateService({email, password}) {
 	if(!email) {
 		throw new ErrorHandler("Email is not provided", 400);
+	}
+
+	if(!password){
+		throw new ErrorHandler("Password is not provided", 400);
 	}
 
 	try {
@@ -13,7 +19,15 @@ export async function authenticateService(email) {
 			.select("*")
 			.first();
 
-		return user;
+		const isValidPassword = decrypt(password, user.password);
+
+		if (!user || !isValidPassword) {
+			return new ErrorHandler("Email ou senha inválidos", 401);
+		}
+ 
+		const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, { expiresIn: "1d" });
+
+		return {token};
 	} catch (err) {
 		throw new ErrorHandler("Usuario nao encontrado", 404);
 	}
