@@ -22,7 +22,7 @@ export async function createUserService({
 		.first();
   
 	if(userAlreadyExists){
-		throw new ErrorHandler("User already exists", 409);
+		throw new ErrorHandler("Usuário já existe", 409);
 	}
 
 	try {

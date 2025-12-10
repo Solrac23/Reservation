@@ -20,7 +20,7 @@ export default {
 		const { userId } = req;
 
 		if(!userId) {
-			throw new ErrorHandler("User id not exist", 404);
+			throw new ErrorHandler("Id do usuário não existe", 404);
 		}
 
 		try {
