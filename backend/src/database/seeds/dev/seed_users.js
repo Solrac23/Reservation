@@ -1,4 +1,4 @@
-import { v4 as uuid } from "uuid";
+import { v7 as uuid } from "uuid";
 import { crypt } from "../../../controller/utils/cryptography.js";
 /**
  * @param { import("knex").Knex } knex
