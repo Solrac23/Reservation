@@ -6,7 +6,7 @@ import router from "./routes.js";
 
 const app = express();
 
-dotenv.config({ path: "./src/config/config.env" });
+dotenv.config({ path: process.env.PATH_ENV });
 
 app.use(cors({
 	// Especificando as origens permitidas, métodos e permitindo credenciais
