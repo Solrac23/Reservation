@@ -3,8 +3,8 @@
  * @returns { Promise<void> }
  */
 export function up(knex) {
-	return knex.schema.createTable("user", function(table) {
-		table.primary("id").increments();
+	return knex.schema.createTable("users", function(table) {
+		table.text("id").defaultTo(knex.fn.uuid()).primary();
 		table.text("first_name", 255).notNullable().checkLength(">=", 3).checkLength("<=", 30);
 		table.text("last_name", 255).notNullable().checkLength(">=", 3).checkLength("<=", 30);
 		table.text("email", 255).notNullable().unique();
@@ -23,5 +23,5 @@ export function up(knex) {
  * @returns { Promise<void> }
  */
 export function down(knex) {
-	return knex.schema.dropTable("user");
+	return knex.schema.dropTable("users");
 }
