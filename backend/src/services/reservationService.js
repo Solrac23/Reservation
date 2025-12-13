@@ -1,5 +1,5 @@
 import db from "../database/db.js";
-import ErrorHandler from "../error/error.js";
+import ErrorHandler from "../error/errorHandler.js";
 
 export async function findAllReservationService(userId) {
 		

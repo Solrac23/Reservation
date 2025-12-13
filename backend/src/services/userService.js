@@ -1,6 +1,7 @@
 import { crypt } from "../controller/utils/cryptography.js";
 import db from "../database/db.js";
-import ErrorHandler from "../error/error.js";
+import { ErrorDatabase } from "../error/errorDatabase.js";
+import ErrorHandler from "../error/errorHandler.js";
 
 export async function createUserService({
 	first_name,
@@ -35,6 +36,9 @@ export async function createUserService({
 			password: pass  // A senha é criptografada antes de ser salva no banco de dados
 		});
 	} catch (err) {
+		if(err.code === "SQLITE_CONSTRAINT"){
+			throw new ErrorDatabase(err.message);
+		}
 		// Se ocorrer algum erro durante o processo de criação da reserva
 		throw new ErrorHandler("Erro ao criar usuário", 500);
 	}

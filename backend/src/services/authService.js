@@ -1,15 +1,15 @@
 import jwt from "jsonwebtoken";
 import { decrypt } from "../controller/utils/cryptography.js";
 import db from "../database/db.js";
-import ErrorHandler from "../error/error.js";
+import ErrorHandler from "../error/errorHandler.js";
 
 export async function authenticateService({email, password}) {
 	if(!email) {
-		throw new ErrorHandler("Email is not provided", 400);
+		throw new ErrorHandler("Email não fornecido", 400);
 	}
 
 	if(!password){
-		throw new ErrorHandler("Password is not provided", 400);
+		throw new ErrorHandler("Password não fornecido", 400);
 	}
 
 	try {
