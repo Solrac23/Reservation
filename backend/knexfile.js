@@ -26,15 +26,16 @@ export default {
 			directory: "./src/database/seeds/dev",
 		},
 		useNullAsDefault: true,
+		debug: true,
 		log:{
 			warn(message) {
-				console.log(message.message);
+				console.log(message);
 			},
 			error(message) {
-				console.error(message.message);
+				console.error(message);
 			},
 			debug(message) {
-				console.log(message.message);
+				console.debug(message);
 			}
 		}
 	},

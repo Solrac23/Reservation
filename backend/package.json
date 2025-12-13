@@ -7,9 +7,12 @@
   "scripts": {
     "start": "node server.js",
     "dev": "cross-env NODE_ENV=development knex migrate:latest && knex seed:run && nodemon ./src/server.js",
+    "lint": "eslint --cache ./src/**/*.js",
+    "lint:fix": "eslint --fix ./src/**/*.js",
     "migrate:make": "knex migrate:make ",
     "migrate:rollback": "knex migrate:rollback --all",
-    "test": "cross-env NODE_ENV=test knex migrate:latest"
+    "seed:make": "cross-env NODE_ENV=test knex seed:make ",
+    "test": "cross-env NODE_ENV=test knex migrate:latest && cross-env NODE_ENV=test knex seed:run && vitest"
   },
   "author": "",
   "license": "ISC",
@@ -28,9 +31,12 @@
     "@eslint/js": "^9.39.1",
     "@stylistic/eslint-plugin": "^5.6.1",
     "@types/bcryptjs": "^2.4.6",
+    "@types/uuid": "^10.0.0",
     "cross-env": "^7.0.3",
     "eslint": "^9.39.1",
     "globals": "^16.5.0",
-    "nodemon": "^3.1.4"
+    "nodemon": "^3.1.4",
+    "supertest": "^7.1.4",
+    "vitest": "^4.0.15"
   }
 }

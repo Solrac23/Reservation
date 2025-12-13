@@ -7,12 +7,15 @@ export default defineConfig([
 	globalIgnores([
 		"node_modules/*",
 		".git/*",
-		"docker-compose.yml"
+		"**/**.yml",
+		"**/*.json",
+		".gitignore",
+		"*.config.js"
 	]),
 	{ 
 		files: ["**/*.{js,mjs,cjs}"], 
 		languageOptions: { 
-			globals: globals.node 
+			globals: globals.node
 		},
 		plugins: {
 			"@stylistic": stylistic,
