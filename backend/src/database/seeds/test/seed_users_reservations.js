@@ -1,3 +1,4 @@
+import {v7 as uuid} from "uuid";
 import { crypt } from "../../../controller/utils/cryptography.js";
 /**
  * @param { import("knex").Knex } knex
@@ -5,13 +6,13 @@ import { crypt } from "../../../controller/utils/cryptography.js";
  */
 export async function seed(knex) {
 	// Deletes ALL existing entries
-	await knex("reservation").del();
-	await knex("user").del();
+	await knex("reservations").del();
+	await knex("users").del();
 
 	let pass = "password";
-	await knex("user").insert([
+	await knex("users").insert([
 		{
-			id: 1, 
+			id: uuid(), 
 			first_name: "Alexander", 
 			last_name: "Frizon",
 			email: "alexander.frizon@example.com",
@@ -19,7 +20,7 @@ export async function seed(knex) {
 			password: crypt(pass)
 		},
 		{
-			id: 2,
+			id: uuid(),
 			first_name: "John", 
 			last_name: "Doe",
 			email: "john.doe@example.com",
@@ -27,7 +28,7 @@ export async function seed(knex) {
 			password: crypt(pass)
 		},
 		{
-			id: 3, 
+			id: uuid(), 
 			first_name: "Jane", 
 			last_name: "Smith",
 			email: "jane.smith@example.com",
@@ -36,10 +37,10 @@ export async function seed(knex) {
 		}
 	]);
 
-	await knex("reservation").insert([
+	await knex("reservations").insert([
 		{
 			id: 1,
-			user_id: knex("user").select("id").first().where({ email: "alexander.frizon@example.com" }),
+			user_id: knex("users").select("id").first().where({ email: "alexander.frizon@example.com" }),
 			date: "2024-08-01",
 			time: "10:00:00",
 			phone: "12345678901",
@@ -47,7 +48,7 @@ export async function seed(knex) {
 		},
 		{
 			id: 2,
-			user_id: knex("user").select("id").first().where({ email: "john.doe@example.com" }),
+			user_id: knex("users").select("id").first().where({ email: "john.doe@example.com" }),
 			date: "2024-08-02",
 			time: "11:00:00",
 			phone: "98765432101",
@@ -55,7 +56,7 @@ export async function seed(knex) {
 		},
 		{
 			id: 3,
-			user_id: knex("user").select("id").first().where({ email: "jane.smith@example.com" }),
+			user_id: knex("users").select("id").first().where({ email: "jane.smith@example.com" }),
 			date: "2024-08-03",
 			time: "12:00:00",
 			phone: "09876543211",
